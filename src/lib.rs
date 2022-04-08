@@ -45,12 +45,13 @@ impl Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Universe {
+        extern crate js_sys;
         let width = 64;
         let height = 64;
 
         let cells = (0..width * height)
             .map(|i| {
-                if i % 2 == 0 || i % 7 == 0 {
+                if js_sys::Math::random() < 0.5 {
                     Cell::Alive
                 } else {
                     Cell::Dead
